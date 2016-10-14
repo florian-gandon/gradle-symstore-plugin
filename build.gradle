@@ -1,0 +1,14 @@
+plugins {
+}
+
+apply plugin: 'groovy'
+
+group = 'com.ullink.gradle'
+description 'Gradle plugin to execute symstore.exe from Microsoft debugging tools.'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.0-groovy-2.4', transitive: false
+}
