@@ -15,18 +15,28 @@ class AddSymbolTask extends ConventionTask {
     String product
 
     @TaskAction
-    void run(){
+    void run() {
+        if(share == null)
+            throw new GradleException('share is not set.')
+
         def command = new CommandBuilder(symstorePath, 'add')
             .withFileArg('f', file?.path)
             .withFileArg('s', share)
             .withArg('t', product)
             .build()
         logger.info "Symstore command: $command"
-        def symstore = command.execute()
         def info = new StringBuilder()
         def error = new StringBuffer()
-        symstore.consumeProcessOutput(info, error)
-        int result = symstore.waitFor()
+        int result = -1
+        def shareFile = new File(share)
+        if(!shareFile.exists()) {
+            shareFile.mkdirs()
+        }
+        StoreLocker.lock(share) {
+            def symstore = command.execute()
+            symstore.consumeProcessOutput(info, error)
+            result = symstore.waitFor()
+        }
         logger.info info.toString()
         logger.error error.toString()
         if(result != 0)
