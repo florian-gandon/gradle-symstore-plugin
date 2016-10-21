@@ -14,6 +14,8 @@ class AddSymbolTask extends ConventionTask {
 
     String product
 
+    boolean compress
+
     @TaskAction
     void run() {
         if(share == null)
@@ -23,6 +25,7 @@ class AddSymbolTask extends ConventionTask {
             .withFileArg('f', file?.path)
             .withFileArg('s', share)
             .withArg('t', product)
+            .withNoValueArg('compress', compress)
             .build()
         logger.info "Symstore command: $command"
         def info = new StringBuilder()

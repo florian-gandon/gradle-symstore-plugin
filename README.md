@@ -13,12 +13,16 @@ This plugin allows to execute symstore provided by Windows Software Development 
     apply plugin: 'symstore'
     
     addSymbol {
+        // Product name, project.name by default
+        product = 'my_product'
         // Path to symstore.exe
         symstorePath = /C:\Program Files (x86)\Windows Kits\8.1\Debuggers\x64\symstore.exe/
         // Path of files or directories to add
         file = 'bin/Release/'
         // Root directory for the symbol store
         share = '\\\\sharing\\symbols'
+        // Symbols will be compressed
+        compress = true
     }
 
 

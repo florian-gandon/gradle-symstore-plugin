@@ -15,15 +15,25 @@ public class CommandBuilder {
 
     public String build() { command }
 
-    CommandBuilder withFileArg(String name, String value) {
+    public CommandBuilder withFileArg(String name, String value) {
         if (value != null && value.length() > 0 && value[-1] == '\\') value += '\\'
         withArg(name, value == null ? null : "\"$value\"")
     }
 
-    CommandBuilder withArg(String name, String value) {
+    public CommandBuilder withArg(String name, String value) {
+        if(value) addArg(name, value)
+        return this
+    }
+
+    private void addArg(String name, String optionalValue = null) {
         if(name == null)
             throw new GradleException('name is not set')
-        if(value) command += " /$name $value"
+        command += " /$name"
+        if(optionalValue) command += " $optionalValue"
+    }
+
+    public CommandBuilder withNoValueArg(String name, boolean toAdd) {
+        if(toAdd) addArg(name)
         return this
     }
 }
