@@ -5,6 +5,7 @@ apply plugin: 'groovy'
 
 group = 'com.ullink.gradle'
 description 'Gradle plugin to execute symstore.exe from Microsoft debugging tools.'
+sourceCompatibility = 1.7
 
 dependencies {
     compile gradleApi()
