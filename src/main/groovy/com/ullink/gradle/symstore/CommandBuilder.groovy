@@ -17,11 +17,11 @@ public class CommandBuilder {
 
     public CommandBuilder withFileArg(String name, String value) {
         if (value != null && value.length() > 0 && value[-1] == '\\') value += '\\'
-        withArg(name, value == null ? null : "\"$value\"")
+        withArg(name, value)
     }
 
     public CommandBuilder withArg(String name, String value) {
-        if(value) addArg(name, value)
+        if(value != null) addArg(name, value)
         return this
     }
 
@@ -29,7 +29,7 @@ public class CommandBuilder {
         if(name == null)
             throw new GradleException('name is not set')
         command += " /$name"
-        if(optionalValue) command += " $optionalValue"
+        if(optionalValue != null) command += " \"$optionalValue\""
     }
 
     public CommandBuilder withNoValueArg(String name, boolean toAdd) {

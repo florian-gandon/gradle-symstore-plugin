@@ -6,23 +6,27 @@ This plugin allows to execute symstore provided by Windows Software Development 
 
     buildscript {
         dependencies {
-            classpath group: 'com.ullink.gradle', name: 'gradle-symstore-plugin', version: '0.1'
+            classpath group: 'com.ullink.gradle', name: 'gradle-symstore-plugin', version: '0.2'
         }
     }
     
     apply plugin: 'symstore'
     
     addSymbol {
-        // Product name, project.name by default
+        // Product name, project.name by default, required
         product = 'my_product'
-        // Path to symstore.exe
+        // Path to symstore.exe, required
         symstorePath = /C:\Program Files (x86)\Windows Kits\8.1\Debuggers\x64\symstore.exe/
-        // Path of files or directories to add
+        // Path of files or directories to add, required
         file = 'bin/Release/'
-        // Root directory for the symbol store
+        // Root directory for the symbol store, required
         share = '\\\\sharing\\symbols'
-        // Symbols will be compressed
+        // Symbols will be compressed, by default false, optional
         compress = true
+        // By default product.version, optional
+        version = '1.0.0'
+        // By default the user and the machine, optional
+        comments = 'personal comments'
     }
 
 
