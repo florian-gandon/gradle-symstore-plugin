@@ -2,6 +2,10 @@
 
 This plugin allows to execute symstore provided by Windows Software Development Kit.
 
+## Deprecation
+
+Prefer the usage of [symbols server](https://github.com/reeflog/symbols_server) together with its [gradle plugin](https://github.com/reeflog/gradle-symstoreserver-plugin).
+
 ## Samples usage
 
     buildscript {
